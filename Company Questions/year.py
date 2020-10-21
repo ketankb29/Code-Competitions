@@ -1,3 +1,4 @@
+import re
 def findyears(str):
     n = len(str)
     def isinteger(a):
@@ -7,11 +8,10 @@ def findyears(str):
 
     years = set()
     for i in range(0,n-8):
-        if isinteger(str[i])==1:
-            if isinteger(str[i+1])==1:
-                if str[i+2]=='-':
-                    year = int(str[i+6:i+9])
-                    years.add(year)
+        if re.match(r"[0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]", str[i:i+10]):
+            year = int(str[i+6:i+9])
+            years.add(year)
+            i+=9
 
     return len(years)
 
